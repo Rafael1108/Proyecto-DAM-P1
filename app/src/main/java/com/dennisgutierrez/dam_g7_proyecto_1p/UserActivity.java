@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -15,6 +16,7 @@ public class UserActivity extends AppCompatActivity {
 
     TextView emailTextView;
     MaterialButton logoutButton;
+    ImageView atencionImageView, aprendizajeImageView, percepcionImageView, pensamientoImageVIew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,11 @@ public class UserActivity extends AppCompatActivity {
 
         emailTextView = findViewById(R.id.emailTextView);
         logoutButton = findViewById(R.id.logoutButton);
+        atencionImageView = findViewById(R.id.atencionImageView);
+        aprendizajeImageView = findViewById(R.id.aprendizajeImageView);
+        percepcionImageView = findViewById(R.id.percepcionImageView);
+        pensamientoImageVIew = findViewById(R.id.pensamientoImageView);
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
@@ -34,6 +41,42 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(UserActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        atencionImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserActivity.this, AtencionActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        aprendizajeImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserActivity.this, AprendizajeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        percepcionImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserActivity.this, PercepcionActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        pensamientoImageVIew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserActivity.this, PensamientoActivity.class);
                 startActivity(intent);
                 finish();
             }
