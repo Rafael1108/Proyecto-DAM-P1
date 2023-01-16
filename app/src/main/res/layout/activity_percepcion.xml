@@ -58,9 +58,9 @@
                 <ImageView
                     android:id="@+id/ImgBase"
                     android:layout_width="120dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_uglogo" />
+                    tools:srcCompat="@drawable/ic_uglogo" />
 
             </FrameLayout>
 
@@ -76,7 +76,7 @@
                 android:textAlignment="center"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:text="@string/percep_strindica1" />
+                tools:text="@string/percep_strindica1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,14 +95,14 @@
                         android:layout_width="120dp"
                         android:layout_height="110dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_uglogo" />
+                        tools:srcCompat="@drawable/ic_uglogo" />
 
                     <ImageView
                         android:id="@+id/imgOpc2"
                         android:layout_width="120dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_uglogo" />
+                        tools:srcCompat="@drawable/ic_uglogo" />
 
                 </LinearLayout>
 
@@ -118,14 +118,14 @@
                         android:layout_width="120dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_uglogo" />
+                        tools:srcCompat="@drawable/ic_uglogo" />
 
                     <ImageView
                         android:id="@+id/imgOpc4"
                         android:layout_width="120dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_uglogo" />
+                        tools:srcCompat="@drawable/ic_uglogo" />
 
                 </LinearLayout>
 
@@ -141,14 +141,14 @@
                         android:layout_width="120dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_uglogo" />
+                        tools:srcCompat="@drawable/ic_uglogo" />
 
                     <ImageView
                         android:id="@+id/imgOpc6"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_uglogo" />
+                        tools:srcCompat="@drawable/ic_uglogo" />
 
                 </LinearLayout>
 
