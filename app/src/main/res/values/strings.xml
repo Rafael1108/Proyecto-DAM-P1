@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DAM-G7-PROYECTO-1P</string>
-    <string name="percep_strindica1">Selecciona cuál es imagen es igual a la de arriba.</string>
-    <string name="percep_strindica2">Selecciona cuál es imagen es más pequeña que la de arriba.</string>
-    <string name="percep_strindica3">Selecciona cuál es imagen es más grande que la de arriba.</string>
+    <string name="percep_strindica1">Selecciona cuál imagen es igual a la de arriba.</string>
+    <string name="percep_strindica2">Selecciona cuál imagen es más pequeña que la de arriba.</string>
+    <string name="percep_strindica3">Selecciona cuál imagen es más grande que la de arriba.</string>
     <string name="percep_strindica_error">No encontramos una pregunta</string>
 </resources>
