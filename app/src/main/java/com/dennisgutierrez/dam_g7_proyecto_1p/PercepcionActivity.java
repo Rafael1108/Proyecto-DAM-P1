@@ -28,16 +28,21 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class PercepcionActivity extends AppCompatActivity {
 
@@ -148,7 +153,39 @@ public class PercepcionActivity extends AppCompatActivity {
 
     private void buscarPregunta()
     {
-        cargarPregunta("Q25");
+        //Se busca un juego al azar
+        Random rand = new Random();
+        int intId = rand.nextInt(38);
+        //para no empezar en 0
+        intId ++;
+        String tmpPregunta= "Q"+intId;
+
+
+        //Crga en memoria la coleccion
+        CollectionReference logUsuario = bdService.collection("percepcion_score").document(IdUsuario).collection("logs");
+
+        // Consulta, se verifica si el juego ya fue realizado.
+        Query query = logUsuario.whereEqualTo("idjuego", tmpPregunta);
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    int rows=0;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        rows++;
+                    }
+
+                    if (rows==0){
+                        cargarPregunta(tmpPregunta);
+                    }
+                    else{ buscarPregunta();}
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
     }
     private void  cargarPregunta(String juego)
     {
@@ -169,11 +206,13 @@ public class PercepcionActivity extends AppCompatActivity {
                         txtIndicaciones.setText(percepcion_library.getIndicaciones(document.get("indicaciones").toString()));
                         respuesta= document.get("respuesta").toString().toUpperCase();
 
+                        newHeight=(int )(Integer.parseInt(document.get("ImgBaseHeight").toString())* scale + 0.5f);
                         imgReal.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgReal.getLayoutParams().height =(newHeight);
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc1").toString())* scale + 0.5f);
                         imgOpc1.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
-                        imgOpc1.getLayoutParams().height =(newHeight );
+                        imgOpc1.getLayoutParams().height =(newHeight);
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc2").toString())* scale + 0.5f);
                         imgOpc2.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
@@ -286,18 +325,21 @@ public class PercepcionActivity extends AppCompatActivity {
         score.put("intentos", (totalIntentos));
         score.put("total_juegos", totalJuegos );
         score.put("tasa_exito",Integer.divideUnsigned(totalJuegos*100,totalIntentos) );
-        DocumentReference washingtonRef = bdService.collection("percepcion_score").document(IdUsuario);
-        washingtonRef.update(score)
+
+
+        bdService.collection("percepcion_score")
+                 .document(IdUsuario)
+                .set(score)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
+                        Log.w(TAG, "Error writing document", e);
                     }
                 });
     }
