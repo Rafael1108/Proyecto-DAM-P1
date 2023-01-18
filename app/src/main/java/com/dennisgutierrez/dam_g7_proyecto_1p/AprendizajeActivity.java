@@ -1,11 +1,15 @@
 package com.dennisgutierrez.dam_g7_proyecto_1p;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Fragment;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +23,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dennisgutierrez.dam_g7_proyecto_1p.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AprendizajeActivity extends AppCompatActivity {
 
@@ -47,10 +61,11 @@ public class AprendizajeActivity extends AppCompatActivity {
     int nivel = 1;
     int cantImagenes = 6;
     int cantTablero = 12;
-    int puntuacion;
-    int aciertos;
-    int errores;
+    int puntuacion, aciertos, errores, intentos;
 
+    //CONTROLES GLOBALES DE LOS AVANCES
+    String totalTiempo;
+    int totalJuegos, totalScore;
     //imagenes
     int[] allImagenes;
     int[] imagenes;
@@ -267,13 +282,17 @@ public class AprendizajeActivity extends AppCompatActivity {
                 primero = null;
                 bloqueo = false;
                 aciertos++;
+                intentos++;
                 puntuacion = (aciertos - errores) * 100;
+
                 textPuntuacion.setText("Puntuación: " + puntuacion);
                 textAciertos.setText("Aciertos: " + aciertos);
                 if (aciertos == imagenes.length){
                     Toast toast = Toast.makeText(getApplicationContext(), "¡¡Ganaste!!", Toast.LENGTH_LONG);
                     toast.show();
                     PauseTimer();
+                    guardarProgreso();
+                    actualizarScoreUsuario();
                     if (nivel < 5){
                         nivel++;
                         cantImagenes++;
@@ -301,7 +320,9 @@ public class AprendizajeActivity extends AppCompatActivity {
                         bloqueo = false;
                         primero = null;
                         errores++;
+                        intentos++;
                         puntuacion = (aciertos - errores) * 100;
+
                         textPuntuacion.setText("Puntuación: " + puntuacion);
                         textAciertos.setText("Aciertos: " + aciertos);
                         textErrores.setText("Errores: " + errores );
@@ -319,7 +340,7 @@ public class AprendizajeActivity extends AppCompatActivity {
         cargarTexto();
         cargarImagenes();
         ResetTimer();
-
+        cargarScoreUsuario();
         arrayDesordenado = barajar(imagenes.length);
         for (int i = 0; i < tablero.length; i++) {
             tablero[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -349,8 +370,116 @@ public class AprendizajeActivity extends AppCompatActivity {
         TimerStart();
     }
 
+    private static String formatTimeStamp(long s){
+        if (s < 10) return "0" + s;
+        else return "" + s;
+    }
+
+    //=====================================================================
+    //region Métodos CRUD en firebase
+
+    private void guardarProgreso(){
+        String tmp = Cronometro.getText().toString().replace("Tiempo: ","00:");
+        Map<String, Object> progreso= new HashMap<>();
+        progreso.put("intentos",intentos);
+        progreso.put("tiempo",tmp);
+        progreso.put("idjuego",nivel);
+
+        //====================
+        progreso.put("score", puntuacion);
+        progreso.put("aciertos", aciertos);
+        progreso.put("errores", errores);
+
+        //almacena el log progreso
+        bdService.collection("aprendizaje_score")
+                .document(IdUsuario).collection("logs").document(Calendar.getInstance().getTime().toString()).set(progreso)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+    private void cargarScoreUsuario(){
+        DocumentReference historial= bdService.collection("aprendizaje_score").document(IdUsuario);
+        historial.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot document,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                if (document != null && document.exists()) {
+                    totalTiempo= document.get("total_tiempo").toString();
+                    totalJuegos= Integer.parseInt( document.get("total_juegos").toString() );
+                    totalScore= Integer.parseInt( document.get("total_score").toString() );
+
+                } else {
+                    totalTiempo= "00:00:00";
+                    totalJuegos=0;
+                    totalScore= 0;
+                }
+
+            }
+        });
+
+    }
+    private void actualizarScoreUsuario(){
+
+        long tm = 0;
+        String tmp = Cronometro.getText().toString().replace("Tiempo: ","00:");
+        ArrayList<String> timestampsList = new ArrayList<String>();
+        timestampsList.add(totalTiempo);
+        timestampsList.add(tmp);
+        for (String time : timestampsList) {
+            String[] arr = time.split(":");
+            tm += Integer.parseInt(arr[2]);
+            tm += 60 * Integer.parseInt(arr[1]);
+            tm += 3600 * Integer.parseInt(arr[0]);
+        }
+
+        long hh = tm / 3600;
+        tm %= 3600;
+        long mm = tm / 60;
+        tm %= 60;
+        long ss = tm;
 
 
+        totalTiempo = formatTimeStamp(hh) + ":" + formatTimeStamp(mm) + ":" + formatTimeStamp(ss);
+
+        totalJuegos++;
+        totalScore +=puntuacion;
+        Map<String, Object> score= new HashMap<>();
+        score.put("total_tiempo", totalTiempo);
+        score.put("total_juegos", totalJuegos );
+        score.put("total_score", totalScore);
+
+        bdService.collection("aprendizaje_score")
+                .document(IdUsuario)
+                .set(score)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+    //endregion
+    //=====================================================================
 
 
 
