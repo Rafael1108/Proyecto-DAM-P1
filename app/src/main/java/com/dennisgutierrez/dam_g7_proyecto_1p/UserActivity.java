@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class UserActivity extends AppCompatActivity {
 
     TextView emailTextView;
+    TextView usuarioTextView;
     MaterialButton logoutButton;
     ImageView atencionImageView, aprendizajeImageView, percepcionImageView, pensamientoImageVIew;
 
@@ -24,6 +25,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         emailTextView = findViewById(R.id.emailTextView);
+        usuarioTextView = findViewById(R.id.usuarioTextView);
         logoutButton = findViewById(R.id.logoutButton);
         atencionImageView = findViewById(R.id.atencionImageView);
         aprendizajeImageView = findViewById(R.id.aprendizajeImageView);
