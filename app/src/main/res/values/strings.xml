@@ -6,7 +6,7 @@
     <string name="percep_strindica_error">ya no se dispone de juegos en este momento</string>
     <string name="percep_strindica_found">Buscando disponibilidad de juego.</string>
 
-    <string name="atencion_strindica1">Selecciona todas las imagenes que encuentres como esta:</string>
+    <string name="atencion_strindica1">Selecciona la imagen que encuentres como esta:</string>
     <string name="atencion_strindica2">Selecciona todas las imagenes que encuentres como esta:</string>
     <string name="atencion_strindica3">Selecciona todos los números que encuentres como este:</string>
     <string name="atencion_strindica_error">No encontramos una pregunta</string>
