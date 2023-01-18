@@ -46,7 +46,7 @@ import java.util.Random;
 
 public class PercepcionActivity extends AppCompatActivity {
 
-
+private static int MAXPREGUNTAS=38;
     private FirebaseFirestore bdService;
     private String IdUsuario;
 
@@ -71,7 +71,7 @@ public class PercepcionActivity extends AppCompatActivity {
     //region Inicializacion de Objetos
     TextView txtScore,txtIndicaciones;
     ImageView imgReal,imgOpc1,imgOpc2,imgOpc3,imgOpc4,imgOpc5,imgOpc6;
-    ProgressBar progStatus;
+    ProgressBar progStatus, progAciertos;
     //endregion
     Button percepcionRegresarButton;
 
@@ -106,7 +106,7 @@ public class PercepcionActivity extends AppCompatActivity {
         imgOpc5= (ImageView) findViewById(R.id.imgOpc5);
         imgOpc6= (ImageView) findViewById(R.id.imgOpc6);
         progStatus= (ProgressBar) findViewById(R.id.progBar);
-
+        progAciertos= (ProgressBar) findViewById(R.id.progBar);
         percepcionRegresarButton = findViewById(R.id.percepcionRegresarButton);
 
 
@@ -121,6 +121,8 @@ public class PercepcionActivity extends AppCompatActivity {
         });
         cargarScoreUsuario();
         buscarPregunta();
+        txtIndicaciones.setText(R.string. percep_strindica_found);
+
     }
 
     //region TimerStart()
@@ -139,53 +141,58 @@ public class PercepcionActivity extends AppCompatActivity {
         progStatus.setVisibility(View.VISIBLE);
         intentos=1;
         respuesta="";
-
-        txtIndicaciones.setText("");
-        imgReal.setImageResource(0 );
+        txtIndicaciones.setText(R.string. percep_strindica_found);
+        imgReal.setImageResource(0);
         imgOpc1.setImageResource(0);
         imgOpc2.setImageResource(0);
         imgOpc3.setImageResource(0);
         imgOpc4.setImageResource(0);
         imgOpc5.setImageResource(0);
         imgOpc6.setImageResource(0);
-
     }
 
     private void buscarPregunta()
     {
-        //Se busca un juego al azar
-        Random rand = new Random();
-        int intId = rand.nextInt(38);
-        //para no empezar en 0
-        intId ++;
-        String tmpPregunta= "Q"+intId;
+        if (totalJuegos>MAXPREGUNTAS)
+        {
+            limpiarPreguntas();
+            txtIndicaciones.setText(R.string.percep_strindica_error);
+        }
+        else {
+            //Se busca un juego al azar
+            Random rand = new Random();
+            int intId = rand.nextInt(MAXPREGUNTAS);
+            //para no empezar en 0
+            intId++;
+            String tmpPregunta = "Q" + intId;
 
 
-        //Crga en memoria la coleccion
-        CollectionReference logUsuario = bdService.collection("percepcion_score").document(IdUsuario).collection("logs");
+            //Crga en memoria la coleccion
+            CollectionReference logUsuario = bdService.collection("percepcion_score").document(IdUsuario).collection("logs");
 
-        // Consulta, se verifica si el juego ya fue realizado.
-        Query query = logUsuario.whereEqualTo("idjuego", tmpPregunta);
+            // Consulta, se verifica si el juego ya fue realizado.
+            Query query = logUsuario.whereEqualTo("idjuego", tmpPregunta);
 
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    int rows=0;
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        rows++;
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        int rows = 0;
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            rows++;
+                        }
+
+                        if (rows == 0) {
+                            cargarPregunta(tmpPregunta);
+                        } else {
+                            buscarPregunta();
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
-
-                    if (rows==0){
-                        cargarPregunta(tmpPregunta);
-                    }
-                    else{ buscarPregunta();}
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.getException());
                 }
-            }
-        });
-
+            });
+        }
     }
     private void  cargarPregunta(String juego)
     {
@@ -307,13 +314,15 @@ public class PercepcionActivity extends AppCompatActivity {
                     totalIntentos= Integer.parseInt( document.get("intentos").toString() );
                     totalJuegos= Integer.parseInt( document.get("total_juegos").toString() );
                     scoreActual= Integer.parseInt( document.get("tasa_exito").toString() );
-                    txtScore.setText(scoreActual + "%");
+
                 } else {
                     totalIntentos= 0;
                     totalJuegos=0;
                     scoreActual= 100;
-                    txtScore.setText(scoreActual + "%");
                 }
+
+                progAciertos.setProgress(scoreActual);
+                txtScore.setText(scoreActual + "% de aciertos." );
             }
         });
 

@@ -82,9 +82,16 @@ public class percepcion_library {
                 return  R.drawable.ic_m37;
             case "M38":
                 return  R.drawable.ic_m38;
-
+            case "M39":
+                return  R.drawable.ic_m39;
+            case "M40":
+                return  R.drawable.ic_m40;
+            case "M41":
+                return  R.drawable.ic_m41;
+            case "M42":
+                return  R.drawable.ic_m42;
             default:
-                return R.drawable.ic_uglogo;
+                return R.drawable.ic_percepcion;
         }
     }
 
