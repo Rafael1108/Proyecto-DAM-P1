@@ -36,16 +36,23 @@ public class AprendizajeActivity extends AppCompatActivity {
     ImageButton imb00, imb01, imb02, imb03,
                 imb04, imb05, imb06, imb07,
                 imb08, imb09, imb10, imb11,
-                imb12, imb13, imb14, imb15;
-    ImageButton[] tablero = new ImageButton[16];
+                imb12, imb13, imb14, imb15,
+                imb16, imb17, imb18, imb19;
+    ImageButton[] allTablero;
+    ImageButton[] tablero;
     Button botonReiniciar;
-    TextView textPuntuacion, textAciertos, textErrores;
+    TextView txtNivel, textPuntuacion, textAciertos, textErrores;
 
+    //CONTROLES DEL JUEGO
+    int nivel = 1;
+    int cantImagenes = 6;
+    int cantTablero = 12;
     int puntuacion;
     int aciertos;
     int errores;
 
     //imagenes
+    int[] allImagenes;
     int[] imagenes;
     int fondo;
 
@@ -145,23 +152,45 @@ public class AprendizajeActivity extends AppCompatActivity {
         imb13 = findViewById(R.id.boton13);
         imb14 = findViewById(R.id.boton14);
         imb15 = findViewById(R.id.boton15);
+        imb16 = findViewById(R.id.boton16);
+        imb17 = findViewById(R.id.boton17);
+        imb18 = findViewById(R.id.boton18);
+        imb19 = findViewById(R.id.boton19);
 
-        tablero[0] = imb00;
-        tablero[1] = imb01;
-        tablero[2] = imb02;
-        tablero[3] = imb03;
-        tablero[4] = imb04;
-        tablero[5] = imb05;
-        tablero[6] = imb06;
-        tablero[7] = imb07;
-        tablero[8] = imb08;
-        tablero[9] = imb09;
-        tablero[10] = imb10;
-        tablero[11] = imb11;
-        tablero[12] = imb12;
-        tablero[13] = imb13;
-        tablero[14] = imb14;
-        tablero[15] = imb15;
+        imb00.setVisibility(View.GONE);
+        imb01.setVisibility(View.GONE);
+        imb02.setVisibility(View.GONE);
+        imb03.setVisibility(View.GONE);
+        imb04.setVisibility(View.GONE);
+        imb05.setVisibility(View.GONE);
+        imb06.setVisibility(View.GONE);
+        imb07.setVisibility(View.GONE);
+        imb08.setVisibility(View.GONE);
+        imb09.setVisibility(View.GONE);
+        imb10.setVisibility(View.GONE);
+        imb11.setVisibility(View.GONE);
+        imb12.setVisibility(View.GONE);
+        imb13.setVisibility(View.GONE);
+        imb14.setVisibility(View.GONE);
+        imb15.setVisibility(View.GONE);
+        imb16.setVisibility(View.GONE);
+        imb17.setVisibility(View.GONE);
+        imb18.setVisibility(View.GONE);
+        imb19.setVisibility(View.GONE);
+
+        allTablero = new ImageButton[]{
+                imb00,imb01,imb02,imb03,imb04,
+                imb05,imb06,imb07,imb08,imb09,
+                imb10,imb11,imb12,imb13,imb14,
+                imb15,imb16,imb17,imb18,imb19
+        };
+        tablero = new ImageButton[cantTablero];
+        for (int i = 0; i < cantTablero; i++) {
+            tablero[i] = allTablero[i];
+            tablero[i].setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     private void cargarBotones(){
@@ -178,9 +207,11 @@ public class AprendizajeActivity extends AppCompatActivity {
         textPuntuacion = findViewById(R.id.txtPuntuacion);
         textAciertos = findViewById(R.id.txtAciertos);
         textErrores = findViewById(R.id.txtErrores);
+        txtNivel = findViewById(R.id.txtNivel);
         aciertos = 0;
         errores = 0;
         puntuacion = (aciertos - errores) * 100;
+        txtNivel.setText("NIVEL " + nivel);
         textPuntuacion.setText("Puntuación: " + puntuacion);
         textAciertos.setText("Aciertos: " + aciertos);
         textErrores.setText("Errores: " + errores );
@@ -189,17 +220,25 @@ public class AprendizajeActivity extends AppCompatActivity {
 
 
     private void cargarImagenes(){
-        imagenes = new int[]{
-                R.drawable.ic_m01,
-                R.drawable.ic_m02,
-                R.drawable.ic_m03,
-                R.drawable.ic_m04,
-                R.drawable.ic_m05,
-                R.drawable.ic_m06,
+        allImagenes = new int[]{
+                R.drawable.ic_m17,
+                R.drawable.ic_m34,
+                R.drawable.ic_m36,
+                R.drawable.ic_m35,
                 R.drawable.ic_m07,
-                R.drawable.ic_m08
+                R.drawable.ic_m05,
+                R.drawable.ic_m01,
+                R.drawable.ic_m08,
+                R.drawable.ic_m04,
+                R.drawable.ic_m06
         };
-        fondo = R.drawable.ic_aprendizaje;
+
+        imagenes = new int[cantImagenes];
+
+        for (int i = 0; i < cantImagenes; i++) {
+            imagenes[i] = allImagenes[i];
+        }
+        fondo = R.drawable.mentalgame_icono;
     }
 
     private ArrayList<Integer> barajar(int longitud){
@@ -235,6 +274,18 @@ public class AprendizajeActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "¡¡Ganaste!!", Toast.LENGTH_LONG);
                     toast.show();
                     PauseTimer();
+                    if (nivel < 5){
+                        nivel++;
+                        cantImagenes++;
+                        cantTablero += 2;
+                        init();
+                    } else {
+                        Toast toastFinish = Toast.makeText(getApplicationContext(), "¡Módulo de Aprendizaje culminado con éxito!", Toast.LENGTH_LONG);
+                        toastFinish.show();
+                        Intent intent = new Intent(AprendizajeActivity.this, UserActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
 
             } else {
@@ -268,7 +319,7 @@ public class AprendizajeActivity extends AppCompatActivity {
         cargarTexto();
         cargarImagenes();
         ResetTimer();
-        TimerStart();
+
         arrayDesordenado = barajar(imagenes.length);
         for (int i = 0; i < tablero.length; i++) {
             tablero[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -295,6 +346,7 @@ public class AprendizajeActivity extends AppCompatActivity {
                 }
             });
         }
+        TimerStart();
     }
 
 
