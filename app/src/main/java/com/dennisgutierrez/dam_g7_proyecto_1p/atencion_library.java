@@ -60,7 +60,7 @@ public class atencion_library {
         switch (strNombre.trim().toUpperCase()) {
             case "IGUAL":
                 return R.string.atencion_strindica1;
-            case "MENOR":
+            case "LADOS":
                 return R.string.atencion_strindica2;
             case "MAYOR":
                 return R.string.atencion_strindica3;
