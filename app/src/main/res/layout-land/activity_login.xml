@@ -4,73 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:padding="25dp"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:padding="10dp"
+    tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/loginImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/mentalgame_icono"
-        android:transitionName="logoImageTrans"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/bienvenidoLabel"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bienvenido"
-        android:layout_marginTop="28dp"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:transitionName="textTrans"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp">
 
-    <TextView
-        android:id="@+id/continuarLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
-        android:layout_marginTop="22dp"
-        android:transitionName="iniciaSesionTextTrans"/>
+        <ImageView
+            android:id="@+id/loginImageView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/mentalgame_icono"
+            android:transitionName="logoImageTrans" />
+
+        <TextView
+            android:id="@+id/bienvenidoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Mental Games"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:transitionName="textTrans" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="14dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp">
+
+        <TextView
+            android:id="@+id/continuarLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:transitionName="iniciaSesionTextTrans" />
+
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usuarioTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:id="@+id/usuarioTextField"
-            android:transitionName="emailInputTextTrans"
+            android:layout_marginBottom="5dp"
             android:hint="Email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:transitionName="emailInputTextTrans">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contrasenaTextField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:id="@+id/contrasenaTextField"
             android:hint="Contraseña"
             android:transitionName="passwordInputTextTrans"
-            app:passwordToggleEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,30 +96,29 @@
             android:text="¿Olvidaste tu contraseña?"
             android:textAlignment="textEnd"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18dp" />
+            android:textSize="14sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/inicioSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Iniciar sesión"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="70dp"
-            android:transitionName="buttonSignInTrans"/>
+            android:transitionName="buttonSignInTrans" />
 
         <TextView
             android:id="@+id/nuevoUsuario"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:textColor="@android:color/darker_gray"
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true"
-            android:textStyle="bold"
             android:text="No tienes cuenta? Registrate!"
-            android:transitionName="newUserTrans"/>
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:transitionName="newUserTrans" />
 
 
     </LinearLayout>

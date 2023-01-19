@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ import java.util.Random;
 
 public class AtencionActivity extends AppCompatActivity {
 
-    private static int MAXPREGUNTAS=3;
+    private static int MAXPREGUNTAS=5;
     private FirebaseFirestore bdService;
     //private FirebaseStorage stService  ;
     private String IdUsuario;
@@ -69,7 +70,7 @@ public class AtencionActivity extends AppCompatActivity {
     TextView txtScore,txtIndicaciones;
     ImageView imgBase,imgAt1,imgAt2,imgAt3,imgAt4,imgAt5,imgAt6,imgAt7,imgAt8,imgAt9,
     imgAt10,imgAt11,imgAt12,imgAt13,imgAt14,imgAt15,imgAt16,imgAt17,imgAt18,imgAt19,imgAt20;
-
+    ProgressBar progStatus;
     Button atencionRegresarButton;
 
     @Override
@@ -120,6 +121,7 @@ public class AtencionActivity extends AppCompatActivity {
         imgAt18= (ImageView) findViewById(R.id.imgAt18);
         imgAt19= (ImageView) findViewById(R.id.imgAt19);
         imgAt20= (ImageView) findViewById(R.id.imgAt20);
+        progStatus= (ProgressBar) findViewById(R.id.progreso);
 
 
         atencionRegresarButton = findViewById(R.id.atencionRegresarButton);
@@ -152,7 +154,7 @@ public class AtencionActivity extends AppCompatActivity {
     //region Preguntas
     private void limpiarPreguntas()
     {
-        //progStatus.setVisibility(View.VISIBLE);
+        progStatus.setVisibility(View.VISIBLE);
         intentos=1;
         respuesta = "";
         txtIndicaciones.setText(R.string. percep_strindica_found);
@@ -267,6 +269,7 @@ public class AtencionActivity extends AppCompatActivity {
                         imgAt20.setImageResource(atencion_library.getImagen(document.get("ImgAt20").toString()));
 
                         TimerStart();
+                        progStatus.setVisibility(View.GONE);
 
                     }
                     else{

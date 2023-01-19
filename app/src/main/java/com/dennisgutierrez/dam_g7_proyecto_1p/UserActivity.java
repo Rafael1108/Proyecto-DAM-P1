@@ -27,6 +27,9 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        //Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar_taller);
+        //setSupportActionBar(myToolbar);
+
 
         emailTextView = findViewById(R.id.emailTextView);
         usuarioTextView = findViewById(R.id.usuarioTextView);
@@ -91,7 +94,13 @@ public class UserActivity extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.acercaDe:
