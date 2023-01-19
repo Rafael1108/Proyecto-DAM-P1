@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,5 +87,20 @@ public class UserActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.acercaDe:
+               Intent call_principal = new Intent(this, AcercaDeActivity.class);
+               startActivity(call_principal);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

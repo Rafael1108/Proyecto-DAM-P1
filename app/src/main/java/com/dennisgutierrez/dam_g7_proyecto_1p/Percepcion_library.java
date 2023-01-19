@@ -2,7 +2,7 @@ package com.dennisgutierrez.dam_g7_proyecto_1p;
 
 import androidx.annotation.NonNull;
 
-public class percepcion_library {
+public class Percepcion_library {
 
     public static  int getImagen(@NonNull String imgNombre)
     {

@@ -6,36 +6,44 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/mentalgame_icono"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/mentalgame_icono"
         android:supportsRtl="true"
         android:theme="@style/Theme.DAMG7PROYECTO1P"
         tools:targetApi="31">
         <activity
+            android:name=".AcercaDeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DAMG7PROYECTO1P.NoActionBar" />
+        <activity
             android:name=".PensamientoActivity"
-            android:exported="false">
+            android:exported="false"
+             >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".PercepcionActivity"
-            android:exported="false">
+            android:exported="false"
+             >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".AprendizajeActivity"
-            android:exported="false">
+            android:exported="false"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".AtencionActivity"
-            android:exported="false">
+            android:exported="false"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

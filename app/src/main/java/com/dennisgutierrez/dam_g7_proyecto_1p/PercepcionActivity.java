@@ -9,15 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,9 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -210,35 +205,35 @@ private static int MAXPREGUNTAS=38;
                         final float scale = PercepcionActivity.this.getResources().getDisplayMetrics().density;
                         int newHeight=0;
 
-                        txtIndicaciones.setText(percepcion_library.getIndicaciones(document.get("indicaciones").toString()));
+                        txtIndicaciones.setText(Percepcion_library.getIndicaciones(document.get("indicaciones").toString()));
                         respuesta= document.get("respuesta").toString().toUpperCase();
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgBaseHeight").toString())* scale + 0.5f);
-                        imgReal.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgReal.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgReal.getLayoutParams().height =(newHeight);
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc1").toString())* scale + 0.5f);
-                        imgOpc1.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgOpc1.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc1.getLayoutParams().height =(newHeight);
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc2").toString())* scale + 0.5f);
-                        imgOpc2.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgOpc2.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc2.getLayoutParams().height =(newHeight );
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc3").toString())* scale + 0.5f);
-                        imgOpc3.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgOpc3.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc3.getLayoutParams().height =(newHeight );
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc4").toString())* scale + 0.5f);
-                        imgOpc4.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgOpc4.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc4.getLayoutParams().height =(newHeight );
 
                         newHeight=(int )(Integer.parseInt(document.get("ImgOpc5").toString())* scale + 0.5f);
-                        imgOpc5.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgOpc5.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc5.getLayoutParams().height =(newHeight );
 
                         newHeight=(int )( Integer.parseInt(document.get("ImgOpc6").toString()) * scale + 0.5f);
-                        imgOpc6.setImageResource(percepcion_library.getImagen(document.get("ImgBase").toString()) );
+                        imgOpc6.setImageResource(Percepcion_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc6.getLayoutParams().height =(newHeight );
 
                         TimerStart();
