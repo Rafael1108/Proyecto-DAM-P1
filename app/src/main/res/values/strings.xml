@@ -13,6 +13,19 @@
     <string name="atencion_strindica3">Selecciona todos los números que encuentres como este:</string>
     <string name="atencion_strindica_error">No encontramos una pregunta</string>
 
+    <string name="pensa_strindica1">Los planetas son redondos. Jupiter es un planeta.</string>
+    <string name="pensa_strindica2">Aristóteles era filósofo. Todo filósofo es griego.</string>
+    <string name="pensa_strindica3">Los vehículos deportivos son costosos. El nuevo Ferrari es costoso.</string>
+    <string name="pensa_strindica4">Todos los hombres respiran. Ninguna mujer respira.</string>
+    <string name="pensa_strindica5">Ninguna persona respira dentro de un líquido. El agua es un líquido.</string>
+    <string name="pensa_strindica6">Las vacas son mamíferos. Las vacas son murciélagos.</string>
+    <string name="pensa_strindica7">Algunos asteroides son de hierro. Algunos asteroides son magnéticos.</string>
+    <string name="pensa_strindica8">Todos los lunes llego tarde al trabajo. No voy más los lunes al trabajo.</string>
+    <string name="pensa_strindica9">Todas las flores tienen perfume. Todas las rosas tienen perfume.</string>
+    <string name="pensa_strindica10">Algunos reptiles tienen patas. Algunos reptiles son perros.</string>
+    <string name="pensa_strindica_error">Ha culminado el modulo.</string>
+    <string name="pensa_strindica_found">Espere por favor.</string>
+
 
     <string name="acerca_percepcion">Actividades que estimulan la capacidad para identificar los objetos del entorno.</string>
     <string name="acerca_atencion">Actividades enfocadas a mejorar y mantener la capacidad de concentración.</string>
