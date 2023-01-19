@@ -34,37 +34,56 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
-            android:gravity="center|top"
-            android:orientation="vertical">
+            android:gravity="center|top">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp">
 
-                <ImageView
-                    android:id="@+id/ImgBase"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:visibility="visible"
-                    tools:srcCompat="@drawable/ic_uglogo" />
+            <LinearLayout
+                android:layout_width="259dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="130dp">
 
-            <TextView
-                android:id="@+id/txtIndicaciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="sans-serif-medium"
-                android:textAlignment="center"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:text="@string/atencion_strindica1" />
+                    <ImageView
+                        android:id="@+id/ImgBase"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        tools:srcCompat="@drawable/ic_uglogo" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtIndicaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    tools:text="@string/percep_strindica1" />
+
+                <Chronometer
+                    android:id="@+id/Cronometro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -308,24 +327,10 @@
 
             </LinearLayout>
 
-            <Chronometer
-                android:id="@+id/Cronometro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="sans-serif-medium"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
