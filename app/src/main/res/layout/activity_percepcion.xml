@@ -7,19 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".PercepcionActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_taller"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:menu="@menu/menu"
-        app:subtitleTextColor="@color/white"
-        app:title="@string/app_title"
-        app:titleTextColor="@color/white"
-        tools:ignore="MissingConstraints" />
-
     <ProgressBar
         android:id="@+id/progBar"
         style="?android:attr/progressBarStyle"
@@ -35,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop= "5dp"
         android:layout_marginEnd="15dp"
         android:foregroundGravity="center"
         android:orientation="vertical"
