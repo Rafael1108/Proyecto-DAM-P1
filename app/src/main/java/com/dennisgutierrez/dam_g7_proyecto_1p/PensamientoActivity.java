@@ -37,7 +37,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class PensamientoActivity extends AppCompatActivity {
 
@@ -54,6 +53,7 @@ public class PensamientoActivity extends AppCompatActivity {
     private String respuesta;
     private String idJuego;
     private int intentos;
+    int intId = 0;
     //endregion
 
     //region variables para score
@@ -145,10 +145,6 @@ public class PensamientoActivity extends AppCompatActivity {
             txtIndicaciones.setText(R.string.pensa_strindica_error);
         }
         else {
-            //Se busca un juego al azar
-            Random rand = new Random();
-            int intId = 2;//rand.nextInt(MAXPREGUNTAS);
-            //para no empezar en 0
             intId++;
             String tmpPregunta = "Q" + intId;
 
@@ -202,17 +198,8 @@ public class PensamientoActivity extends AppCompatActivity {
                         imgReal.setImageResource(Pensamiento_library.getImagen(document.get("ImgBase").toString()) );
                         imgReal.getLayoutParams().height =(newHeight);
 
-                        newHeight=(int )(Integer.parseInt(document.get("ImgOpc1").toString()));
-                        //imgOpc1.setImageResource(Pensamiento_library.getImagen(document.get("ImgBase").toString()) );
                         imgOpc1.setImageResource(R.drawable.ic_m67);
-                        //imgOpc1.getLayoutParams().height =(newHeight);
-
-                        newHeight=(int )(Integer.parseInt(document.get("ImgOpc2").toString()));
-                        //imgOpc2.setImageResource(Pensamiento_library.getImagen(document.get("ImgBase").toString()));
                         imgOpc2.setImageResource(R.drawable.ic_m66);
-                        //imgOpc2.getLayoutParams().height =(newHeight);
-
-
                         TimerStart();
                         progStatus.setVisibility(View.GONE);
                     }

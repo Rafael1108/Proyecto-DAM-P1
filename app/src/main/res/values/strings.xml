@@ -13,16 +13,16 @@
     <string name="atencion_strindica3">Selecciona todos los números que encuentres como este:</string>
     <string name="atencion_strindica_error">No encontramos una pregunta</string>
 
-    <string name="pensa_strindica1">Los planetas son redondos. Jupiter es un planeta.</string>
-    <string name="pensa_strindica2">Aristóteles era filósofo. Todo filósofo es griego.</string>
-    <string name="pensa_strindica3">Los vehículos deportivos son costosos. El nuevo Ferrari es costoso.</string>
-    <string name="pensa_strindica4">Todos los hombres respiran. Ninguna mujer respira.</string>
-    <string name="pensa_strindica5">Ninguna persona respira dentro de un líquido. El agua es un líquido.</string>
-    <string name="pensa_strindica6">Las vacas son mamíferos. Las vacas son murciélagos.</string>
-    <string name="pensa_strindica7">Algunos asteroides son de hierro. Algunos asteroides son magnéticos.</string>
-    <string name="pensa_strindica8">Todos los lunes llego tarde al trabajo. No voy más los lunes al trabajo.</string>
-    <string name="pensa_strindica9">Todas las flores tienen perfume. Todas las rosas tienen perfume.</string>
-    <string name="pensa_strindica10">Algunos reptiles tienen patas. Algunos reptiles son perros.</string>
+    <string name="pensa_strindica1">Los planetas son redondos.\n Jupiter es un planeta.</string>
+    <string name="pensa_strindica2">Aristóteles era filósofo.\n Todo filósofo es griego.</string>
+    <string name="pensa_strindica3">Los vehículos deportivos son costosos.\n El nuevo Ferrari es costoso.</string>
+    <string name="pensa_strindica4">Todos los hombres respiran.\n Ninguna mujer respira.</string>
+    <string name="pensa_strindica5">Ninguna persona respira dentro de un líquido.\n El agua es un líquido.</string>
+    <string name="pensa_strindica6">Las vacas son mamíferos.\n Las vacas son murciélagos.</string>
+    <string name="pensa_strindica7">Algunos asteroides son de hierro.\n Algunos asteroides son magnéticos.</string>
+    <string name="pensa_strindica8">Todos los lunes llego tarde al trabajo.\n No voy más los lunes al trabajo.</string>
+    <string name="pensa_strindica9">Todas las flores tienen perfume.\n Todas las rosas tienen perfume.</string>
+    <string name="pensa_strindica10">Algunos reptiles tienen patas.\n Algunos reptiles son perros.</string>
     <string name="pensa_strindica_error">Ha culminado el modulo.</string>
     <string name="pensa_strindica_found">Espere por favor.</string>
 

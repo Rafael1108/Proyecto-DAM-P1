@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".PensamientoActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_taller"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:menu="@menu/menu"
-        app:subtitleTextColor="@color/white"
-        app:title="@string/app_title"
-        app:titleTextColor="@color/white"
-        tools:ignore="MissingConstraints" />
-
     <ProgressBar
         android:id="@+id/progBar"
         style="?android:attr/progressBarStyle"
@@ -34,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:foregroundGravity="center"
         android:orientation="vertical"
@@ -52,12 +39,12 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp">
+                android:layout_height="210dp">
 
                 <ImageView
                     android:id="@+id/ImgBase"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="208dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center"
                     tools:srcCompat="@drawable/ic_uglogo" />
 
@@ -117,7 +104,7 @@
                     android:layout_marginVertical="7dp"
                     android:gravity="center"
                     android:orientation="horizontal">
-<!--
+                    <!--
                     <ImageView
                         android:id="@+id/imgOpc3"
                         android:layout_width="120dp"
@@ -189,8 +176,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="15dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ProgressBar
@@ -208,10 +195,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Puntaje"
                 android:layout_marginBottom="15dp"
-                android:textSize="25sp"
                 android:gravity="center"
+                android:text="Puntaje"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <Button
